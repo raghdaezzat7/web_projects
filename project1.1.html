@@ -1,0 +1,129 @@
+<html>
+	<head>
+		<link  rel="stylesheet"  href="css1.css"/>
+	</head>
+	
+	<body>
+	<div id="dBody">
+		<div class="welcome">
+			<div id="opacity">
+			<h1 id="header"> Welcome Kids </h1>
+			</div>
+		</div>
+		
+		<div class="div1">
+			<input type="number" placeholder="enter number" id="userLetter">
+			<br>
+			<button type=submit id="uButton">OK</button>
+			<br>
+			<div id="generatedButtons">
+			</div>
+			<img id="letterImg">
+		</div>
+	</div>
+		
+		
+		<script>
+			//array of letters
+			var letters;
+			letters=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+			
+			var lImg = document.getElementById("letterImg")
+			var butt=document.getElementById("uButton");
+			butt.addEventListener('click',function(e){
+			//remove image if it seen
+			//lImg.src='';
+
+			var usButt = document.getElementById("generatedButtons");
+			while (usButt.hasChildNodes()) {  
+					usButt.removeChild(usButt.firstChild);
+				}
+
+			//Generate array of user input number
+			var numOfLetters = document.getElementById("userLetter").value;
+			//if(numOfLetters <0 || numOfLetters >26)
+			//{
+				//alert ("please, Enter right number");
+			//}
+				if(numOfLetters >26 | numOfLetters<1){
+
+					alert("Check Your Number");
+				}
+				else
+				{
+				
+			
+					var arrayOFSelectdLetter=[];
+					
+					var myRandValues=[];
+
+					for(var i=0;i<numOfLetters;i++){
+						var rand=getRandomNum(0,26);
+							
+							while(myRandValues.includes(rand)){
+								rand=getRandomNum(0,26);
+								}
+								arrayOFSelectdLetter[i]=letters[rand];
+								myRandValues[i]=rand;
+							}
+
+
+						
+					
+									var x=0;
+					//Create Buttons of letters selected
+					var newButton =document.getElementById("generatedButtons");
+					var generatButtons = document.getElementsByTagName("button");
+					for(var i = 0; i < arrayOFSelectdLetter.length; i++ )
+					{	x++;
+						var newNode = document.createElement("button");
+						var newTextNode = document.createTextNode(arrayOFSelectdLetter[i]);
+						generatButtons[i].addEventListener("click", function(e)
+						{
+
+							var alphabet=e.target.textContent;
+							if(alphabet!="OK")
+								lImg.src=alphabet+'.jpg';
+							//else
+								//lImg.src='';
+								//lImg.src=alphabet+'.jpg';
+
+							//document.write(e.target.textContent);
+						});
+						newNode.appendChild(newTextNode);
+						newButton.appendChild(newNode);
+					}
+
+
+
+					generatButtons[numOfLetters].addEventListener("click", function(e)
+						{
+
+							var alphabet=e.target.textContent;
+							if(alphabet!="OK")
+								lImg.src=alphabet+'.jpg';
+							//else
+								//lImg.src='';
+								//lImg.src=alphabet+'.jpg';
+
+							//document.write(e.target.textContent);
+						});
+						newNode.appendChild(newTextNode);
+						newButton.appendChild(newNode);
+
+				}
+			
+
+		});
+
+
+
+			function getRandomNum (max,min)
+			{
+				return Math.floor(Math.random() * (max - min) ) + min;
+				
+			}
+
+		</script>
+	</body>
+</html>
